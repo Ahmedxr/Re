@@ -2,61 +2,25 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8" />
-<title>عد تنازلي حتى الساعة 8 مساءً</title>
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #222;
-    color: #0f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 4rem;
-    direction: rtl;
-  }
-  #countdown {
-    background: #333;
-    padding: 20px 50px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #0f9;
-  }
-</style>
+<title>اختبار عد تنازلي بسيط</title>
 </head>
-<body>
-
+<body style="font-size: 40px; text-align: center; direction: rtl;">
 <div id="countdown">جارِ الحساب...</div>
 
 <script>
   const countdownEl = document.getElementById('countdown');
+  let totalSeconds = 10; // 10 ثواني للتجربة
 
   function updateCountdown() {
-    const now = new Date();
-    // تعيين موعد الساعة 8 مساءً اليوم
-    const target = new Date();
-    target.setHours(20, 0, 0, 0);
-
-    let diff = target - now; // الفرق بالميلي ثانية
-
-    if (diff <= 0) {
-      countdownEl.textContent = "وصلت الساعة 8 مساءً!";
+    countdownEl.textContent = totalSeconds + " ثانية";
+    totalSeconds--;
+    if (totalSeconds < 0) {
+      countdownEl.textContent = "انتهى الوقت!";
       clearInterval(timer);
-      return;
     }
-
-    // تحويل الفرق إلى دقائق وساعات وثواني
-    let totalSeconds = Math.floor(diff / 1000);
-    let hours = Math.floor(totalSeconds / 3600);
-    let minutes = Math.floor((totalSeconds % 3600) / 60);
-    let seconds = totalSeconds % 60;
-
-    // صياغة الوقت مع تنسيق 0 قبله إذا كان رقم صغير
-    let timeStr = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-
-    countdownEl.textContent = timeStr;
   }
 
-  updateCountdown(); // عرض أولي
+  updateCountdown();
   const timer = setInterval(updateCountdown, 1000);
 </script>
 
